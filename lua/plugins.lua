@@ -1,3 +1,4 @@
+-- XXX: NO OLVIDAR CORRER EL COMANDO: ':PlugInstall'
 -- ESTO INSTALA PACKER
 vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer"
 local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"

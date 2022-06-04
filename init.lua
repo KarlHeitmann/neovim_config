@@ -1,8 +1,10 @@
 vim.cmd([[
   set runtimepath^=~/.vim runtimepath+=~/.vim/after
   let &packpath = &runtimepath
-  source ~/.vimrc
 ]])
+
+require('general_settings')
+require('basic_mappings')
 
 require('plugins')
 
@@ -16,7 +18,12 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
   -- use 'nfdsfsdeovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
 end)
+
 
 -- use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
 
@@ -25,6 +32,7 @@ end)
 vim.cmd([[
   call plug#begin()
   Plug 'neovim/nvim-lspconfig'
+  Plug 'scrooloose/nerdtree'
   Plug 'simrat39/rust-tools.nvim'
 
   """ Debugging
@@ -41,5 +49,4 @@ require'lspconfig'.rust_analyzer.setup({})
 require'lspconfig'.solargraph.setup{}
 
 require('lsp_keybindings')
-
 
