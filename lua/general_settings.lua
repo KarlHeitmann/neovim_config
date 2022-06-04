@@ -7,7 +7,7 @@ vim.cmd([[
   set relativenumber
   set mouse=a
 
-  colorscheme gruvbox
+  " colorscheme gruvbox
 
 
   set tabstop=2     " tabs are at proper location
