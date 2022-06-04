@@ -11,34 +11,84 @@ vim.cmd([[
 	let g:vimspector_enable_mappings = 'HUMAN'
 ]])
 
--- fn.stdpath("data")
--- lua require('plugins')
+local use = require('packer').use
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim' -- Package manager
+  use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+  -- use 'nfdsfsdeovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+end)
+
+-- use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+
+--require('lspconfig')
+
+vim.cmd([[
+  call plug#begin()
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'simrat39/rust-tools.nvim'
+
+  """ Debugging
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'mfussenegger/nvim-dap'
+
+  Plug 'neovim/nvim-lspconfig'
+  call plug#end()
+]])
+
+-- require('lspconfig').pyright.setup{}
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.rust_analyzer.setup({})
+require'lspconfig'.solargraph.setup{}
 
 
 
--- vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer/"
--- vim.g.package_home = vim.fn.stdpath("data") .. "/site/pack/packer"
--- local packer_install_dir = vim.g.package_home .. "/opt/packer.nvim"
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
--- local plug_url_format = ""
--- if vim.g.is_linux then
---   plug_url_format = "https://hub.fastgit.xyz/%s"
--- else
---   plug_url_format = "https://github.com/%s"
--- end
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
--- local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
--- local install_cmd = string.format("10split |term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+end
 
--- Auto-install packer in case it hasn't been installed.
--- if vim.fn.glob(packer_install_dir) == "" then
-  -- vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-  -- vim.cmd(install_cmd)
--- end
 
--- Load packer.nvim
--- vim.cmd("packadd packer.nvim")
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+-- local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'pyright', 'rust_analyzer', 'solargraph' }
 
--- the plugin install follows from here
-
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    }
+  }
+end
 
