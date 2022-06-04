@@ -1,6 +1,7 @@
 
 require('plugins')
 local use = require('packer').use
+-- XXX: recordar que para usar packer, hay que correr el comando para instalar las cosas!!!
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
@@ -9,6 +10,15 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'neovim/nvim-lspconfig'
+  use 'scrooloose/nerdtree'
+  use 'simrat39/rust-tools.nvim'
+  use 'ellisonleao/gruvbox.nvim'
+
+  use 'nvim-lua/plenary.nvim'
+  use 'mfussenegger/nvim-dap'
+
+  use 'neovim/nvim-lspconfig'
 end)
 
 --vim.cmd([[
@@ -21,21 +31,6 @@ end)
 -- use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
 
 --require('lspconfig')
-
-vim.cmd([[
-  call plug#begin()
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'scrooloose/nerdtree'
-  Plug 'simrat39/rust-tools.nvim'
-  Plug 'ellisonleao/gruvbox.nvim'
-
-  """ Debugging
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'mfussenegger/nvim-dap'
-
-  Plug 'neovim/nvim-lspconfig'
-  call plug#end()
-]])
 
 vim.opt.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
