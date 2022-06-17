@@ -1,3 +1,4 @@
+vim.lsp.set_log_level("debug")
 
 require('plugins')
 local use = require('packer').use
@@ -23,7 +24,33 @@ require('packer').startup(function()
 
   use 'puremourning/vimspector'
   -- END DEBUGGING
+  --
+  -- use 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'ThePrimeagen/harpoon' -- harpoon para con cierto comando buscar archivos y hacer unos grep mejorados con rust
+  -- use 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  use 'junegunn/fzf' --, { 'do': { -> fzf#install() } }
+  use 'junegunn/fzf.vim' -- fuzzy finder
+
+  -- git blame
+  use 'f-person/git-blame.nvim'
+
+  -- ansiesc.vim
+  use 'powerman/vim-plugin-AnsiEsc'
 end)
+
+use {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
+
+
+vim.cmd([[
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+]])
 
 
 --vim.cmd([[
@@ -31,6 +58,21 @@ end)
 --	let g:vimspector_enable_mappings = 'HUMAN'
 --]])
 
+vim.cmd([[
+  " This is the default option:
+  "   - Preview window on the right with 50% width
+  "   - CTRL-/ will toggle preview window.
+  " - Note that this array is passed as arguments to fzf#vim#with_preview function.
+  " - To learn more about preview window options, see `--preview-window` section of `man fzf`.
+  let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+  " Preview window on the upper side of the window with 40% height,
+  " hidden by default, ctrl-/ to toggle
+  let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
+
+  " Empty value to disable preview window altogether
+  let g:fzf_preview_window = []
+]])
 
 
 -- use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
@@ -45,7 +87,6 @@ vim.cmd([[
 
 require('nvim_cmp')
 require('general_settings')
-require('basic_mappings')
 
 -- require('lspconfig').pyright.setup{}
 require'lspconfig'.pyright.setup{}
@@ -53,4 +94,20 @@ require'lspconfig'.rust_analyzer.setup({})
 require'lspconfig'.solargraph.setup{}
 
 require('lsp_keybindings')
+
+vim.cmd([[
+  set tabstop=2     " tabs are at proper location
+  set expandtab     " don't use actual tab character (ctrl-v)
+  set shiftwidth=2  " indenting is 4 spaces
+  set autoindent    " turns it on
+  set smartindent   " does the right thing (mostly) in programs
+  set cindent       " stricter rules for C programs
+  set pastetoggle=<f12>
+]])
+
+require('basic_mappings')
+
+--local bo = { noremap=true, silent=true, buffer=bufnr }
+--vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu(), bo)
+  --" :lua require("harpoon-menu")()<CR>
 
