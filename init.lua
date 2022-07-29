@@ -61,6 +61,8 @@ require('packer').startup(function()
 
   -- vim fugitive, to work with git
   use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
+  use 'junegunn/gv.vim'
 end)
 
 
