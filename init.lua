@@ -1,4 +1,7 @@
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
+vim.cmd([[
+  set list listchars=tab:>\ ,trail:-,eol:$
+]])
 
 require('plugins')
 local use = require('packer').use
@@ -33,16 +36,32 @@ require('packer').startup(function()
   use 'junegunn/fzf.vim' -- fuzzy finder
 
   -- git blame
-  use 'f-person/git-blame.nvim'
+  -- use 'f-person/git-blame.nvim'
 
-  -- ansiesc.vim
+  -- ansiesc.vim: with :AnsiEsc you can toggle wether you can see text colorized on vim that has Ansi Escape characters or not. Nice to use with rails logger information
   use 'powerman/vim-plugin-AnsiEsc'
-end)
 
-use {
-  'nvim-telescope/telescope.nvim',
-  requires = { {'nvim-lua/plenary.nvim'} }
-}
+  -- neoterm, to make easier to handle the terminal on vim
+  use 'kassio/neoterm'
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  -- use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  --[[ -- Visual Git Plugin for Neovim to enhance your git experience
+  use {
+    'tanvirtin/vgit.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    }
+  }
+  --]]
+
+  -- vim fugitive, to work with git
+  use 'tpope/vim-fugitive'
+end)
 
 
 vim.cmd([[
@@ -51,7 +70,6 @@ nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
 ]])
-
 
 --vim.cmd([[
 --	packadd! vimspector
@@ -88,6 +106,31 @@ vim.cmd([[
 require('nvim_cmp')
 require('general_settings')
 
+require('telescope').setup{
+  defaults = {
+    layout_strategy = 'vertical',
+    layout_config = {
+      vertical = { width = 0.5, height = 0.75 }
+      -- other layout configuration here
+    },
+    -- layout_config = { height = 0.95 },
+  },
+}
+
+--[[
+require('telescope').setup({
+  defaults = {
+    layout_config = {
+      vertical = { width = 0.5 }
+      -- other layout configuration here
+    },
+    -- other defaults configuration here
+  },
+  -- other configuration values here
+})
+--]]
+
+-- :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.5}})
 -- require('lspconfig').pyright.setup{}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup({})
@@ -106,8 +149,10 @@ vim.cmd([[
 ]])
 
 require('basic_mappings')
+-- require('vgit_configuration')
 
 --local bo = { noremap=true, silent=true, buffer=bufnr }
 --vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu(), bo)
   --" :lua require("harpoon-menu")()<CR>
+
 
