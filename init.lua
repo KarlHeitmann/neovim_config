@@ -109,6 +109,19 @@ require('nvim_cmp')
 require('general_settings')
 
 require('telescope').setup{
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      theme = "dropdown",
+      previewer = false,
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        }
+      }
+    }
+  },
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
