@@ -1,9 +1,14 @@
 vim.cmd([[
+  nnoremap <leader>1 :Gitexplorer<CR>
   nnoremap <F7> :NERDTreeToggle<CR>
+  nnoremap <leader>d ?\<Detail\><CR>
+  nnoremap <C-B> ?\<binding\><CR>
+  nnoremap <C-b> /\<binding\><CR>
   nnoremap <C-h> <C-w>h
   nnoremap <C-j> <C-w>j
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
+  nnoremap · *
   nnoremap <leader>i :split<CR>
   nnoremap <leader>s :vsplit<CR>
   nnoremap <leader>c :close<CR>
