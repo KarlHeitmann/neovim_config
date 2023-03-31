@@ -12,6 +12,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'lvimuser/lsp-inlayhints.nvim'
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
@@ -131,7 +132,7 @@ require('telescope').setup{
     -- layout_config = { height = 0.95 },
   },
 }
-
+require("lsp-inlayhints").setup()
 --[[
 require('telescope').setup({
   defaults = {
@@ -170,4 +171,16 @@ require('basic_mappings')
 --vim.keymap.set('n', '<leader>hm', require("harpoon.ui").toggle_quick_menu(), bo)
   --" :lua require("harpoon-menu")()<CR>
 
+vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = "LspAttach_inlayhints",
+  callback = function(args)
+    if not (args.data and args.data.client_id) then
+      return
+    end
 
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    require("lsp-inlayhints").on_attach(client, bufnr)
+  end,
+})
