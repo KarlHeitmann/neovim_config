@@ -2,6 +2,7 @@ vim.cmd([[
   nnoremap <leader>1 :Gitexplorer<CR>
   nnoremap <F7> :NERDTreeToggle<CR>
   nnoremap <leader>d ?\<Detail\><CR>
+  nnoremap <leader>f ?\<Failure\><CR>
   nnoremap <C-B> ?\<binding\><CR>
   nnoremap <C-b> /\<binding\><CR>
   nnoremap <C-h> <C-w>h

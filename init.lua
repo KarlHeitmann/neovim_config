@@ -8,6 +8,7 @@ local use = require('packer').use
 -- XXX: recordar que para usar packer, hay que correr el comando para instalar las cosas!!!
 -- XXX: Hay que correr ademas el comando :PackerInstall u otro similar para instalar estos paquetes dentro de la startup function, de lo contrario los paquetes no se van a instalar por si solos
 require('packer').startup(function()
+  use 'yetone/avante.nvim'
   use 'wbthomason/packer.nvim' -- Package manager
   use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
@@ -15,12 +16,34 @@ require('packer').startup(function()
   use 'lvimuser/lsp-inlayhints.nvim'
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'tpope/vim-unimpaired' -- keybindings for vim
+  use 'maxMEllon/vim-jsx-pretty'
+
+  use 'prettier/vim-prettier'
+
+  -- nvim v0.7.2
+  use({
+      "kdheepak/lazygit.nvim",
+      -- optional for floating window border decoration
+      requires = {
+          "nvim-lua/plenary.nvim",
+      },
+  })
+  use 'elzr/vim-json'
 
   -- ANTIGUOS Plug
   use 'scrooloose/nerdtree'
   use 'simrat39/rust-tools.nvim'
   use 'ellisonleao/gruvbox.nvim'
   -- FIN ANTIGUOS Plug
+  use 'nikvdp/ejs-syntax'
+  -- GREPPER
+  use 'mhinz/vim-grepper'
+  -- vim-unimpaired
+
+  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }})
+
+  use 'elixir-editors/vim-elixir'
 
   -- Debugging
   use 'nvim-lua/plenary.nvim'
@@ -151,6 +174,22 @@ require('telescope').setup({
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.rust_analyzer.setup({})
 require'lspconfig'.solargraph.setup{}
+require'lspconfig'.gopls.setup{
+	cmd = {'gopls'},
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	    settings = {
+	      gopls = {
+		      experimentalPostfixCompletions = true,
+		      analyses = {
+		        unusedparams = true,
+		        shadow = true,
+		     },
+		     staticcheck = true,
+		    },
+	    },
+	on_attach = on_attach,
+}
 
 require('lsp_keybindings')
 
@@ -184,3 +223,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     require("lsp-inlayhints").on_attach(client, bufnr)
   end,
 })
+--
+-- require('grepper_settings')
