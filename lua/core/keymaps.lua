@@ -23,6 +23,21 @@ map("n", "<C-j>", "<C-w><C-j>", "Navigate windows down")
 map("n", "<C-k>", "<C-w><C-k>", "Navigate windows up")
 map("n", "<C-l>", "<C-w><C-l>", "Navigate windows to the right")
 
+map("n", "<A-h>", "<C-w>h", "Navigate windows to the left")
+map("n", "<A-j>", "<C-w>j", "Navigate windows to the down")
+map("n", "<A-k>", "<C-w>k", "Navigate windows to the up")
+map("n", "<A-l>", "<C-w>l", "Navigate windows to the right")
+
+map("t", "<A-h>", "<C-\\><C-N><C-w>h", "Navigate windows to the left")
+map("t", "<A-j>", "<C-\\><C-N><C-w>j", "Navigate windows to the down")
+map("t", "<A-k>", "<C-\\><C-N><C-w>k", "Navigate windows to the up")
+map("t", "<A-l>", "<C-\\><C-N><C-w>l", "Navigate windows to the right")
+
+map("i", "<A-h>", "<C-\\><C-N><C-w>h", "Navigate windows to the left")
+map("i", "<A-j>", "<C-\\><C-N><C-w>j", "Navigate windows to the down")
+map("i", "<A-k>", "<C-\\><C-N><C-w>k", "Navigate windows to the up")
+map("i", "<A-l>", "<C-\\><C-N><C-w>l", "Navigate windows to the right")
+
 -- Move with shift-arrows
 map("n", "<S-Left>", "<C-w><S-h>", "Move window to the left")
 map("n", "<S-Down>", "<C-w><S-j>", "Move window down")
@@ -60,3 +75,34 @@ end, "Toggle between light and dark themes")
 
 -- Clear after search
 map("n", "<leader>ur", "<cmd>nohl<cr>", "Clear highlights")
+
+map("n", "<leader>i", ":split<cr>", "Split current window")
+map("n", "<leader>s", ":vsplit<cr>", "Vertical split current window")
+map("n", "<leader>c", ":close<cr>", "Close current window")
+
+--  TERMINAL COMMANDS :help terminal-emulator
+--  To map <Esc> to exit terminal-mode: >
+--    :tnoremap <Esc> <C-\><C-n>
+map("t", "<Esc>", "<C-\\><C-n>", "map <Esc> to exit terminal-mode")
+
+--    :tnoremap <A-h> <C-\><C-N><C-w>h
+--    :tnoremap <A-j> <C-\><C-N><C-w>j
+--    :tnoremap <A-k> <C-\><C-N><C-w>k
+--    :tnoremap <A-l> <C-\><C-N><C-w>l
+
+--    :tnoremap <A-h> <C-\><C-N><C-w>h
+--    :tnoremap <A-j> <C-\><C-N><C-w>j
+--    :tnoremap <A-k> <C-\><C-N><C-w>k
+--    :tnoremap <A-l> <C-\><C-N><C-w>l
+
+--    :inoremap <A-h> <C-\><C-N><C-w>h
+--    :inoremap <A-j> <C-\><C-N><C-w>j
+--    :inoremap <A-k> <C-\><C-N><C-w>k
+--    :inoremap <A-l> <C-\><C-N><C-w>l
+
+--    :nnoremap <A-h> <C-w>h
+--    :nnoremap <A-j> <C-w>j
+--    :nnoremap <A-k> <C-w>k
+--    :nnoremap <A-l> <C-w>l
+
+

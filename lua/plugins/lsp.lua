@@ -65,6 +65,14 @@ return {
       local on_attach = function(client, bufnr)
         local lsp_map = require("helpers.keys").lsp_map
 
+        -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+        -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+        lsp_map("[d", vim.diagnostic.goto_prev, bufnr, "Go to previous diagnostic")
+        lsp_map("]d", vim.diagnostic.goto_next, bufnr, "Go to next diagnostic")
+        -- lsp_map("<leader><space>", vim.diagnostic.show, bufnr, "Display current diagnostic")
+        lsp_map("<leader><space>", vim.diagnostic.open_float, bufnr, "Display current diagnostic")
+
         lsp_map("<leader>lr", vim.lsp.buf.rename, bufnr, "Rename symbol")
         lsp_map("<leader>la", vim.lsp.buf.code_action, bufnr, "Code action")
         lsp_map("<leader>ld", vim.lsp.buf.type_definition, bufnr, "Type definition")
@@ -111,6 +119,27 @@ return {
             },
           },
         },
+      })
+
+      -- Ruby
+      -- TODO:
+      -- - Add todo navigation plugin
+      -- - Add keymap to auto fix diagnosed problem
+      -- require'lspconfig'.solargraph.setup{}
+      require("lspconfig")["solargraph"].setup({
+        on_attach = on_attach,
+        capabilities = capabilities
+      })
+
+      -- , 'tsserver', 'eslint'
+      require("lspconfig")["tsserver"].setup({
+        on_attach = on_attach,
+        capabilities = capabilities
+      })
+
+      require("lspconfig")["eslint"].setup({
+        on_attach = on_attach,
+        capabilities = capabilities
       })
 
       -- Python
