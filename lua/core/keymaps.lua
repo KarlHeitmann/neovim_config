@@ -106,3 +106,5 @@ map("t", "<Esc>", "<C-\\><C-n>", "map <Esc> to exit terminal-mode")
 --    :nnoremap <A-l> <C-w>l
 
 
+-- Go to definition in new split -- XXX: Not working :(
+-- map("n", "<silent> gv", ":vsplit<CR>gd")

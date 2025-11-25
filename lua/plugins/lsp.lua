@@ -21,6 +21,7 @@ return {
         ensure_installed = {
           "lua_ls",
           "pylsp",
+          -- "prettier"
         },
         automatic_installation = true,
       })

@@ -2,6 +2,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    -- dir = "/home/karl/github/KarlHeitmann/nvim_plugins/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",

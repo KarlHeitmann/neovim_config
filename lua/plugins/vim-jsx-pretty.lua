@@ -2,6 +2,6 @@
 return {
   {
     "MaxMEllon/vim-jsx-pretty",
-    enabled=false
+    enabled=true
   }
 }
