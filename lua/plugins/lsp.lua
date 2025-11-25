@@ -101,7 +101,7 @@ return {
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
       -- Lua
-      require("lspconfig")["lua_ls"].setup({
+      vim.lsp.config("lua_ls", {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -126,30 +126,28 @@ return {
       -- TODO:
       -- - Add todo navigation plugin
       -- - Add keymap to auto fix diagnosed problem
-      -- require'lspconfig'.solargraph.setup{}
-      require("lspconfig")["solargraph"].setup({
+      vim.lsp.config("solargraph", {
         on_attach = on_attach,
         capabilities = capabilities
       })
 
-      -- , 'tsserver', 'eslint'
-      require("lspconfig")["ts_ls"].setup({
+      vim.lsp.config("ts_ls", {
         on_attach = on_attach,
         capabilities = capabilities
       })
 
-      require("lspconfig")["rust_analyzer"].setup({
+      vim.lsp.config("rust_analyzer", {
         on_attach = on_attach,
         capabilities = capabilities
       })
 
-      require("lspconfig")["eslint"].setup({
+      vim.lsp.config("eslint", {
         on_attach = on_attach,
         capabilities = capabilities
       })
 
       -- Python
-      require("lspconfig")["pylsp"].setup({
+      vim.lsp.config("pylsp", {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
