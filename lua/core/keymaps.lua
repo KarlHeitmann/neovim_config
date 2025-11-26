@@ -1,7 +1,7 @@
 local map = require("helpers.keys").map
 
 -- Blazingly fast way out of insert mode
-map("i", "jk", "<esc>")
+-- map("i", "jk", "<esc>")
 
 -- Quick access to some common actions
 map("n", "<leader>fw", "<cmd>w<cr>", "Write")
@@ -90,6 +90,11 @@ map("t", "<Esc>", "<C-\\><C-n>", "map <Esc> to exit terminal-mode")
 --    :tnoremap <A-k> <C-\><C-N><C-w>k
 --    :tnoremap <A-l> <C-\><C-N><C-w>l
 
+-- MAC ONLY KEYBINDING: map Control - h, j, k, l to (in terminal mode) navigate one window left, down, up, right i
+map("t", "<C-h>", "<C-\\><C-n><C-w>h", "(terminal mode) map <Control + h> to navigate windows left")
+map("t", "<C-j>", "<C-\\><C-n><C-w>j", "(terminal mode) map <Control + j> to navigate windows down")
+map("t", "<C-k>", "<C-\\><C-n><C-w>k", "(terminal mode) map <Control + k> to navigate windows up")
+map("t", "<C-l>", "<C-\\><C-n><C-w>l", "(terminal mode) map <Control + l> to navigate windows right")
 --    :tnoremap <A-h> <C-\><C-N><C-w>h
 --    :tnoremap <A-j> <C-\><C-N><C-w>j
 --    :tnoremap <A-k> <C-\><C-N><C-w>k

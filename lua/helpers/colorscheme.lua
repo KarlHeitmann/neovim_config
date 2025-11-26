@@ -17,6 +17,7 @@ end
 
 -- set colorscheme on interpreter:
 -- :lua vim.cmd.colorscheme("catppuccin")
+-- XXX: To switch back and forth from light to dark use: ":set background=dark" or ":set background=light"
 
 -- Uncomment the colorscheme to use
 -- local colorscheme = get_if_available("catppuccin")
