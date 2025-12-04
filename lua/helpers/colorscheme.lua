@@ -15,6 +15,13 @@ local function get_if_available(name, opts)
   return "default"
 end
 
+-- Turns off cursor color
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    vim.opt_local.guicursor = ""
+  end,
+})
+
 -- set colorscheme on interpreter:
 -- :lua vim.cmd.colorscheme("catppuccin")
 -- XXX: To switch back and forth from light to dark use: ":set background=dark" or ":set background=light"

@@ -98,6 +98,7 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+          { name = "codeium" },
         },
       })
     end,
