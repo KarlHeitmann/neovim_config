@@ -42,6 +42,15 @@ return {
       map("n", "<leader>sg", require("telescope.builtin").live_grep, "Grep")
       map("n", "<leader>sd", require("telescope.builtin").diagnostics, "Diagnostics")
 
+      -- vim.keymap.set("n", "<space>en", function()
+      --   require('telescope.builtin').find_files {
+      --     cwd = vim.fn.
+      --   }
+      -- end)
+
+      -- require "lua.config.telescope.multigrep".setup()
+      require "telescope.multigrep".setup()
+
       map("n", "<C-p>", require("telescope.builtin").keymaps, "Search keymaps")
     end,
   },
