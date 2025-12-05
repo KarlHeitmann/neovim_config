@@ -29,8 +29,8 @@ return {
   keys = {
     -- { "<leader>fd", "<cmd>Telescope dir live_grep<CR>", mode = "n", silent = true, desc = "Telescope dir live_grep" },
     -- { "<leader>pd", "<cmd>Telescope dir find_files<CR>", mode = "n", silent = true, desc = "Telescope dir find_files" },
-    { "<leader>fd", "<cmd>GrepInDirectory<CR>", mode = "n", silent = true, desc = "GrepInDirectory" },
-    { "<leader>pd", "<cmd>FileInDirectory<CR>", mode = "n", silent = true, desc = "FileInDirectory" },
+    { "<space>fd", "<cmd>GrepInDirectory<CR>", mode = "n", silent = true, desc = "GrepInDirectory" },
+    { "<space>pd", "<cmd>FileInDirectory<CR>", mode = "n", silent = true, desc = "FileInDirectory" },
   },
   -- Add the specific extension commands to the 'cmd' list
   cmd = { "Telescope", "Telescope dir live_grep", "Telescope dir find_files", "GrepInDirectory", "FileInDirectory" },
