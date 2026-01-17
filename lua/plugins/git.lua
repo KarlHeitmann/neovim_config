@@ -74,5 +74,12 @@ return {
       map("n", "<leader>ga", "<cmd>Git add %<cr>", "Stage the current file")
       map("n", "<leader>gb", "<cmd>Git blame<cr>", "Show the blame")
     end
+  },
+  {
+    "tpope/vim-rhubarb",
+    config = function()
+      -- local map = require("helpers.keys").map
+      -- map("n", "<leader>gb", "<cmd>GBrowse<cr>", "Show the blame")
+    end
   }
 }
