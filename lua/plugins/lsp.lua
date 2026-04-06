@@ -35,18 +35,16 @@ return {
       -- Turn on LSP status information
       require("fidget").setup()
 
-      -- Set up cool signs for diagnostics
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
-
       -- Diagnostic config
-      local config = {
+      vim.diagnostic.config({
         virtual_text = false,
         signs = {
-          active = signs,
+          text = {
+            [vim.diagnostic.severity.ERROR] = "󰙙 ",
+            [vim.diagnostic.severity.WARN] = "󰔩 ",
+            [vim.diagnostic.severity.HINT] = "󠀵 ",
+            [vim.diagnostic.severity.INFO] = "󰑉 ",
+          },
         },
         update_in_insert = true,
         underline = true,
@@ -59,8 +57,7 @@ return {
           header = "",
           prefix = "",
         },
-      }
-      vim.diagnostic.config(config)
+      })
 
       -- This function gets run when an LSP connects to a particular buffer.
       local on_attach = function(client, bufnr)
@@ -91,9 +88,6 @@ return {
         end, { desc = "Format current buffer with LSP" })
 
         lsp_map("<leader>ff", "<cmd>Format<cr>", bufnr, "Format")
-
-        -- Attach and configure vim-illuminate
-        require("illuminate").on_attach(client)
       end
 
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
