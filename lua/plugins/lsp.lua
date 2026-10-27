@@ -125,6 +125,20 @@ return {
         capabilities = capabilities
       })
 
+      -- Rubocop — use the project's bundled rubocop so plugin versions
+      -- match Gemfile.lock (Mason's standalone gem env drifts and causes
+      -- `cannot load such file -- rubocop/rspec/language/node_pattern`
+      -- style load errors when rubocop-rspec_rails and rubocop-rspec
+      -- get out of sync).
+      vim.lsp.config("rubocop", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = (vim.fn.filereadable("Gemfile") == 1)
+            and { "bundle", "exec", "rubocop", "--lsp" }
+            or  { "rubocop", "--lsp" },
+      })
+
+
       vim.lsp.config("ts_ls", {
         on_attach = on_attach,
         capabilities = capabilities
