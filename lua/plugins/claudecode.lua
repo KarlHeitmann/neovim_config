@@ -1,7 +1,17 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-  config = true,
+  opts = {
+    terminal = {
+      snacks_win_opts = {
+        keys = {
+          -- Replaces snacks' double-<Esc> mapping, whose first <Esc> interrupts Claude.
+          -- <C-\><C-n> can't be typed on the Spanish ISO layout, so use <C-q> instead.
+          term_normal = { "<C-q>", "<C-\\><C-n>", mode = "t", desc = "Exit terminal mode" },
+        },
+      },
+    },
+  },
   -- `cmd` lets lazy.nvim create command stubs that load the plugin on first use,
   -- so `:ClaudeCode` and friends work on a fresh start. Without it, a keys-only
   -- spec defers loading until a <leader>a* mapping is pressed and the commands
